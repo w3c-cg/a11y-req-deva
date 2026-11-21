@@ -1,5 +1,7 @@
+# a11y-req-deva
 
-# Specification 'a11y-req-deva'
+Devanagari Accessibility Requirements for the Web
 
-This is the repository for a11y-req-deva. You're welcome to contribute! Let's make the Web rock our socks
-off!
+This document describes characteristics of the Devanagari script, and of languages written in it such as Hindi, that affect how web content is read, segmented, displayed and spoken. It is a working draft and does not yet present settled requirements.
+
+It is developed by the [Accessibility Internationalization Community Group](https://www.w3.org/community/global-inclusion/).
