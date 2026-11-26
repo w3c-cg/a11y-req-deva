@@ -3,6 +3,15 @@
 <head>
   <meta charset="utf-8">
   <title>Devanagari Accessibility Requirements for the Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap">
+  <style>
+    /* Long conjuncts such as र्त्स्न्या need a font with full Devanagari shaping. */
+    :lang(hi), :lang(ne), :lang(doi), :lang(sa) {
+      font-family: "Noto Sans Devanagari", "Kohinoor Devanagari", "Nirmala UI", sans-serif;
+    }
+  </style>
 
   <script
     src="https://www.w3.org/Tools/respec/respec-w3c"
@@ -12,7 +21,7 @@
   <script class="remove">
     var respecConfig = {
       specStatus: "CG-DRAFT",
-      group: "cg/global-inclusion",
+      group: "global-inclusion",
       shortName: "a11y-req-deva",
       editors: [
           { name: "Sanjay C.", w3cid: "179297", },
@@ -81,7 +90,7 @@
 </tr>
 <tr>
 <td>2.2</td>
-<td>Inherent vowel, matras and visual reordering</td>
+<td>Inherent vowel, matras, and visual reordering</td>
 <td>How assistive technologies handle it</td>
 </tr>
 <tr>
@@ -194,7 +203,9 @@
 <li>Swaran Lata, Somnath Chandra, and Prashant Verma. <em>Indic Layout Requirements</em>. W3C Working Draft, 29 May 2020. <a href="https://www.w3.org/TR/ilreq/">https://www.w3.org/TR/ilreq/</a></li>
 <li>W3C Internationalization Working Group. <em>India Language Enablement</em> (IIP). <a href="https://w3c.github.io/iip/home">https://w3c.github.io/iip/home</a></li>
 <li>Richard Ishida. <em>Hindi Orthography Notes</em>. <a href="https://r12a.github.io/scripts/deva/hi">https://r12a.github.io/scripts/deva/hi</a></li>
-<li>Unicode Consortium. <em>Unicode Standard Annex #29: Unicode Text Segmentation</em>, Unicode 15.1.0, Revision 43. <a href="https://www.unicode.org/reports/tr29/tr29-43.html">https://www.unicode.org/reports/tr29/tr29-43.html</a> Rule GB9c is unchanged in Revision 47 (Unicode 17.0.0), the version used for the comparison in §2.6. <a href="https://www.unicode.org/reports/tr29/tr29-47.html">https://www.unicode.org/reports/tr29/tr29-47.html</a> Unicode 18.0 revises GB9c in Revision 49. <a href="https://www.unicode.org/reports/tr29/tr29-49.html">https://www.unicode.org/reports/tr29/tr29-49.html</a> The §2.6 examples have not been segmented under that revision.</li>
+<li>Unicode Consortium. <em>Unicode Standard Annex #29: Unicode Text Segmentation</em>, Unicode 15.1.0, Revision 43. <a href="https://www.unicode.org/reports/tr29/tr29-43.html">https://www.unicode.org/reports/tr29/tr29-43.html</a></li>
+<li>Unicode Consortium. <em>Unicode Standard Annex #29: Unicode Text Segmentation</em>, Unicode 17.0.0, Revision 47. <a href="https://www.unicode.org/reports/tr29/tr29-47.html">https://www.unicode.org/reports/tr29/tr29-47.html</a> Rule GB9c is unchanged in Revision 47 (Unicode 17.0.0), the version used for the comparison in §2.6.</li>
+<li>Unicode Consortium. <em>Unicode Standard Annex #29: Unicode Text Segmentation</em>, Unicode 18.0.0, Revision 49. <a href="https://www.unicode.org/reports/tr29/tr29-49.html">https://www.unicode.org/reports/tr29/tr29-49.html</a> Unicode 18.0 revises GB9c in this revision. The §2.6 examples have not been segmented under that revision.</li>
 <li>Unicode Consortium. <em>Derived Core Properties</em>, Unicode 15.1.0, <code>Indic_Conjunct_Break</code>. <a href="https://www.unicode.org/Public/15.1.0/ucd/DerivedCoreProperties.txt">https://www.unicode.org/Public/15.1.0/ucd/DerivedCoreProperties.txt</a></li>
 <li>Unicode Consortium. <em>Composition Exclusions</em>, Unicode 17.0.0 (U+0958 to U+095F). <a href="https://www.unicode.org/Public/17.0.0/ucd/CompositionExclusions.txt">https://www.unicode.org/Public/17.0.0/ucd/CompositionExclusions.txt</a></li>
 <li>Adeetee Bhide. “Copying Helps Novice Learners Build Orthographic Knowledge: Methods for Teaching Devanagari Akshara.” <em>Reading and Writing</em> 31(1), 1–33, 2018. <a href="https://doi.org/10.1007/s11145-017-9767-8">https://doi.org/10.1007/s11145-017-9767-8</a></li>
