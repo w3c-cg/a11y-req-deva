@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Devanagari Accessibility Requirements for the Web</title>
+
+  <script
+    src="https://www.w3.org/Tools/respec/respec-w3c"
+    class="remove"
+    defer></script>
+
+  <script class="remove">
+    var respecConfig = {
+      specStatus: "CG-DRAFT",
+      group: "cg/global-inclusion",
+      shortName: "a11y-req-deva",
+      editors: [
+          { name: "Sanjay C.", w3cid: "179297", },
+      ],
+      github: {
+          repoURL: "w3c-cg/a11y-req-deva",
+          branch: "main",
+      },
+      license: "w3c-software-doc",
+      copyrightStart: "2026",
+      xref: true
+    };
+  </script>
+</head>
+
+<body>
+  <section id="abstract">
+<p>Devanagari behaves differently from the Latin alphabet in ways that matter when text is read, segmented, displayed or spoken aloud. This document describes those features, for the script and for the languages written in it. It is groundwork for later requirements, and it does not present untested observations as requirements.</p>
+
+  </section>
+  <section id="sotd">
+    <p>This is a draft developed under the
+      <a href="https://www.w3.org/community/global-inclusion/">Accessibility Internationalization Community Group</a>.
+      It is a working characteristics draft: it describes characteristics of Devanagari, and of languages written in it, and the accessibility questions they raise. It presents no settled requirements.</p>
+    <p>This version corresponds to Revision 7 of the draft circulated for private review in October 2026.</p>
+  </section>
+<section id="introduction" class="level2">
+<h2>Introduction</h2>
+<section id="purpose" class="level3">
+<h3>Purpose</h3>
+<p>This document is for people who write or review Web accessibility guidance for Devanagari content. Its job is to keep two things apart: script behaviour that is already established, and accessibility questions that still need testing.</p>
+<p>It is a sibling of <em>Accessibility Requirements for Japanese Web Content</em> and follows the same outline, though it is stricter about evidence. None of the characteristics below is carried over from the Japanese document.</p>
+</section>
+<section id="relationship-to-w3c-devanagari-resources" class="level3">
+<h3>Relationship to W3C Devanagari resources</h3>
+<p>You are assumed to know the terms and concepts in <a href="https://www.w3.org/TR/deva-lreq/">Devanagari Script Resources</a>, so the script is not described again here. This document picks out the characteristics that matter for accessibility, and the questions each one raises.</p>
+<p>Three W3C documents cover Devanagari layout, and the Internationalization Working Group’s <a href="https://w3c.github.io/iip/home">India Language Enablement</a> pages (IIP) list all three:</p>
+<ul>
+<li><em>Devanagari Script Resources</em> (<code>deva-lreq</code>) describes the script and what its layout requires.</li>
+<li><em>Devanagari Gap Analysis</em> (<code>deva-gap</code>) records where specifications and browsers fall short. It is a Group Draft Note and describes itself as work in progress.</li>
+<li><em>Indic Layout Requirements</em> (<code>ilreq</code>), a 2020 Working Draft mainly about Devanagari, defines the orthographic syllable formally and sets out layout requirements, letter spacing among them. What it says about grapheme clusters predates Unicode 15.1.</li>
+</ul>
+<p>None of the three deals with accessibility, screen readers or synthesized speech. This document addresses that gap. It builds on the three documents and does not replace them. For shaping, orthographic syllables, conjuncts and segmentation in more depth, see those documents and the <a href="https://r12a.github.io/scripts/deva/hi">Hindi orthography notes</a>.</p>
+</section>
+<section id="script-and-language-distinction" class="level3">
+<h3>Script and language distinction</h3>
+<p>Devanagari is used for Hindi, Marathi, Nepali, Sanskrit, Konkani and other languages. Shaping and segmentation belong to the script, so they may hold across all of them. Pronunciation, vocabulary and grammatical register belong to each language. Language-specific observations are labelled as such, and a property documented for Hindi must not be assumed to hold for every language written in Devanagari.</p>
+</section>
+</section>
+<section id="accessibility-relevant-characteristics-of-devanagari" class="level2">
+<h2>Accessibility-Relevant Characteristics of Devanagari</h2>
+<p>Each subsection below describes one characteristic and the questions it leaves open.</p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Characteristic</th>
+<th>Still open</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.1</td>
+<td>The orthographic syllable as a unit</td>
+<td>Which unit each operation should use (§2.6)</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>Inherent vowel, matras and visual reordering</td>
+<td>How assistive technologies handle it</td>
+</tr>
+<tr>
+<td>2.3</td>
+<td>Conjuncts and the virama</td>
+<td>What visible differences mean for readers</td>
+</tr>
+<tr>
+<td>2.4</td>
+<td>The shirorekha (top line)</td>
+<td>Whether a broken line affects readers</td>
+</tr>
+<tr>
+<td>2.5</td>
+<td>Word boundaries and line breaking</td>
+<td>Boundaries for each operation</td>
+</tr>
+<tr>
+<td>2.6</td>
+<td>User-perceived characters</td>
+<td>Which unit each operation should use</td>
+</tr>
+<tr>
+<td>2.7</td>
+<td>Character recognition and reading load</td>
+<td>Direct Devanagari reader evidence</td>
+</tr>
+<tr>
+<td>2.8</td>
+<td>Language-level characteristics</td>
+<td>How current screen readers and voices behave</td>
+</tr>
+<tr>
+<td>2.9</td>
+<td>Letters for sounds outside the basic set</td>
+<td>Search, matching and speech</td>
+</tr>
+</tbody>
+</table>
+<section id="orthographic-syllable" class="level3">
+<h3>Orthographic syllable</h3>
+<p><em>Devanagari Script Resources</em> defines a consonant-initial orthographic syllable as the whole consonant cluster plus any following vowels and diacritics. A syllable can also begin with an independent vowel letter. <em>Indic Layout Requirements</em> covers both cases in a formal definition, with one more rule for a consonant followed by virama at the end of a word: <code>V[m] | {CH}C[v][m] | CH</code>.</p>
+<p>This document uses the <code>deva-lreq</code> definition. Section 2.6 compares it with extended grapheme cluster boundaries on the tested Devanagari examples, and says what is still open beyond them.</p>
+<p>The unit matters whenever software moves through text, or selects, deletes, highlights, spaces or breaks it. If software treats each code point as a separate visible character, it can split a sequence that the orthography treats as one syllable. Which unit is right may still depend on the operation (§2.6).</p>
+</section>
+<section id="inherent-vowel-matras-and-visual-reordering" class="level3">
+<h3>Inherent vowel, matras, and visual reordering</h3>
+<p>A Devanagari consonant carries an inherent vowel unless that vowel is changed or suppressed. Dependent vowel signs, or matras, can sit above, below, before or after the consonant. Take <strong><span lang="hi">कि</span></strong>: the vowel sign is stored after the consonant, drawn to its left, and pronounced after it.</p>
+<p>So the stored order, the visible order and the spoken order can all differ. An operation that follows the writing system keeps the consonant and its vowel sign together. How assistive technologies handle that relationship has not been tested.</p>
+<p>Styling only part of a syllable causes a related problem. <em>Devanagari Gap Analysis</em> records that markup wrapped around only some characters of a syllable can separate a pre-base vowel sign from its consonant (gap #89). In Chrome 153 the shape did not break, but the partial styling was not applied as written: a style on the first part spread to the whole cluster, and a style on a vowel sign alone was lost. Other engines have not been tested, and no reader effect is claimed.</p>
+<p>Vowel signs also reach above the shirorekha and below the baseline. The gap analysis notes that underlines and overlines need to take them into account (gap #90).</p>
+</section>
+<section id="conjuncts-and-virama" class="level3">
+<h3>Conjuncts and virama</h3>
+<p>The virama (U+094D) suppresses the inherent vowel and can join consonants into a conjunct. Depending on the sequence and the font, you see a half-form, a stacked form, a fused ligature, or a visible virama. ZWJ and ZWNJ can change which of these appears.</p>
+<p>So the stored sequence and what you see on screen can differ. An operation that changes visual presentation may need to keep a conjunct intact, yet a visible virama may call for a different boundary from one that forms a conjunct. Font fallback can change the visible result without changing the text.</p>
+<p>The gap analysis states the consequence directly: “Since the underlying code points are identical if a cluster is displayed as a conjunct or instead with visible viramas, it’s not possible to distinguish one situation from another by working with the code points” (gap #115). It also records browser engines differing in which part of such a cluster they style as a first letter (gaps #94 and #115). Those are the gap analysis’s records, not results for current versions of every engine. What these differences mean for readers has not been established.</p>
+</section>
+<section id="shirorekha" class="level3">
+<h3>Shirorekha</h3>
+<p>Many Devanagari letters connect through the shirorekha, the line along the top of a word. Shaping draws it; it is not encoded as a character. Letters do not all meet it in the same way.</p>
+<p>Letter spacing breaks the line between units. <em>Indic Layout Requirements</em> treats this as the normal look of letter-spaced Devanagari, as on signs and in decorative text: space goes between orthographic syllables and the top bar is broken (§6). A broken line under letter spacing is expected typography, not a rendering fault. Other styling can cut the joins between letters too; the gap analysis records this for text stroke (gap #139).</p>
+<p>Whether conjuncts survive letter spacing is a separate question. The gap analysis records half-form conjuncts being split in Gecko, Blink and WebKit (gap #117), and records the underlying grapheme-cluster issue as fixed (gap #87). In Chrome 153, ten words containing conjuncts — six usually drawn as half-forms, and four usually drawn as fused or stacked forms — were letter-spaced at 0.12em and 0.5em in three fonts, and none of the conjuncts split. Safari and Firefox have not been tested. Behaviour should be recorded for each engine and version, not assumed.</p>
+<p>The accessibility question is different again. On a sign, a designer chooses spacing for a few words. A reader using accessibility overrides may apply it to whole passages to make them easier to read. Whether a broken shirorekha then affects recognition, and for whom, needs evidence from readers. The typographic convention and the rendering tests do not answer it.</p>
+</section>
+<section id="word-boundaries-and-line-breaking-hindi-example" class="level3">
+<h3>Word boundaries and line breaking: Hindi example</h3>
+<p>Modern Hindi normally puts spaces between words, so requirements written for unspaced Japanese text do not carry over. Spaces do not settle every boundary, though. Matras and conjuncts sit inside words, and compounds, punctuation, numerals and mixed-script runs all matter for selection, search, line breaking and navigation.</p>
+<p>Ordinary practice for Hindi is described in the <a href="https://r12a.github.io/scripts/deva/hi">Hindi orthography notes</a> (Line &amp; paragraph layout) and in <em>Indic Layout Requirements</em> §4. The notes say that Hindi text is normally wrapped at word boundaries. They also say that breaking a word at the end of a line, with a hyphen, is possible but uncommon, partly because Hindi contains mostly short words. Hyphenation is much more common when Sanskrit is written in Devanagari, they add, because those words tend to be longer.</p>
+<p>Where a word is broken, <em>Indic Layout Requirements</em> allows the break at an orthographic syllable boundary, with a hyphen at the break. A word that already contains a hyphen, such as <span lang="hi">नर-नारी</span>, can break after it.</p>
+<p>The notes say that justification is done principally by adjusting the space between words. They do not say whether high-end systems also adjust the space between characters. In the Noto Serif comparison the notes illustrate, ascenders and vowel signs, especially with tone marks, extend slightly beyond Latin ascenders and descenders, which matters for line spacing. No Devanagari-specific source on paragraph separation has been found yet.</p>
+<p>Punctuation has its own cases. The danda (<span lang="hi">।</span>) and double danda (<span lang="hi">॥</span>) are expected to behave like a full stop, so no line should begin with one. Browsers have differed on whether double-clicking a word also selects the danda (<code>deva-gap</code> #88; <code>ilreq</code> §3.1).</p>
+<p>Word-level and character-level operations should not assume that boundaries designed for English are enough. The right Devanagari boundary depends on the operation and, in some cases, on the language.</p>
+</section>
+<section id="user-perceived-characters" class="level3">
+<h3>User-perceived characters</h3>
+<p>Unicode 15.1 added grapheme-break rule GB9c, which uses the <code>Indic_Conjunct_Break</code> property. Where a sequence matches the rule, there is no extended grapheme cluster break before the following consonant. <em>Devanagari Gap Analysis</em> records this change as fixing extended grapheme clusters for Devanagari, and notes that the browser engines current at the time of that Note support the new rules (gap #87). So extended grapheme clusters matter for Devanagari segmentation, but they do not answer every accessibility question.</p>
+<p>The comparison below was made under Unicode 17 (UAX #29 Revision 47). Unicode 18.0 was published on 16 September 2026, and UAX #29 Revision 49 revises GB9c. These examples have not been segmented under that revision.</p>
+<p><em>Indic Layout Requirements</em> §2.3 gives 260 Devanagari examples. As published, 259 of them coincide with Unicode 17 extended grapheme clusters. The remaining one, the Hindi example <code><span lang="hi">र्त्स्न्या</span>:</code>, uses U+003A COLON where U+0903 DEVANAGARI SIGN VISARGA is intended; with U+0903, the sequence is one cluster. The examples come from eleven languages: Hindi, Nepali, Kashmiri, Maithili, Dogri, Sanskrit, Marathi, Santhali, Konkani, Bodo and Sindhi. They are not every possible sequence in those languages. They include reph, clusters of three or more consonants, nukta, and a consonant plus virama at the end of a word.</p>
+<p>For the examples ilreq gives as one syllable (its Rules 1 and 2), the comparison checked that Unicode 17 produced exactly one extended grapheme cluster. For words ending in a consonant plus virama (Rule 3), it checked that the final cluster was a consonant, an optional nukta, and a virama. There are nine Devanagari examples of that rule: <code><span lang="ne">छन्</span></code>, <code><span lang="ne">हुन्</span></code>, <code><span lang="ne">गर्दैनन्</span></code>, <code><span lang="ne">गर्छस्</span></code>, <code><span lang="doi">राह्</span></code>, <code><span lang="doi">ओह्</span></code>, <code><span lang="sa">तेजस्</span></code>, <code><span lang="sa">मरुत्</span></code> and <code><span lang="sa">माम्</span></code>. In each of them the earlier clusters also match the word’s syllables; <code><span lang="ne">गर्दैनन्</span></code>, for example, segments as <span lang="ne">ग · र्दै · न · न्</span>.</p>
+<p>Apart from the published colon, then, the two units have the same boundaries on these examples. That still does not tell us which unit an operation should use. A general “use clusters” rule would go beyond this comparison, and so would a general “clusters are inadequate” rule. What remains open is narrower: sequences the examples do not cover, visible units that depend on the font rather than the encoded text, and which unit each operation should use.</p>
+<p>Navigation, selection, deletion, speech and visual overrides each need testing against three kinds of unit: extended grapheme clusters, orthographic syllables, and the caret or glyph boundaries a renderer produces. That includes text where viramas are visible and where joiners control the form. None of these units is yet preferred for every operation. A visible virama or font fallback can change how glyphs are grouped, but not the Unicode cluster boundaries of the same encoded text. Whether readers treat the new grouping as one unit has not been tested. A requirement should name the operation and the unit suited to it.</p>
+<p>This finding is specific to Devanagari. Indic scripts differ in their conjunct properties: Kannada, Gurmukhi and Tamil have no <code>Indic_Conjunct_Break = Linker</code> assignment in Unicode 15.1 through 17, and under the same Unicode 17 rules their conjunct examples in <em>Indic Layout Requirements</em> split into several extended grapheme clusters. The gap analysis likewise notes that the problem remains for several other scripts (gap #87). The Devanagari result must not be generalized to all Indic writing systems.</p>
+</section>
+<section id="character-recognition-and-reading-load" class="level3">
+<h3>Character recognition and reading load</h3>
+<p>Matras, types of conjunct and font-dependent forms are candidate variables for recognition studies. Bhide (2018) reports an experiment in which English-speaking adults learned a semi-artificial orthography modeled on Devanagari; Nag (2022) offers a broader framework for akshara writing systems. Neither establishes an accessibility effect for children learning Devanagari, fluent adults, readers with dyslexia, readers with low vision, or assistive-technology users. Findings from Kannada are not evidence about Devanagari.</p>
+<p><strong>Editor’s note:</strong> No direct Devanagari reader evidence is currently cited. Practical experience, such as that of accessible-format producers and reading-support practitioners, and documented reader accounts can contribute alongside research, each with its limits stated. The evidence needed to make a presentation option available may differ from the evidence needed to prescribe one presentation for every reader. Until a population, a task, and an outcome are documented, this section is not a basis for a requirement.</p>
+</section>
+<section id="language-level-characteristics" class="level3">
+<h3>Language-level characteristics</h3>
+<p>Correct BCP 47 language metadata, which the author controls, is a prerequisite for language-aware processing. It does not guarantee the right voice or pronunciation. What a listener hears also depends on the user agent, screen reader, installed voices, fallback behaviour, and how changes of language within a passage are handled.</p>
+<p>In Hindi, schwa deletion means that an inherent vowel shown in the spelling is not always pronounced. The phenomenon, and how one text-to-speech system treats it, are documented. How current screen readers and voices handle it has not been tested in this work. The same assumption cannot be carried over unchanged to Sanskrit or other Devanagari languages.</p>
+<p>These are language questions, not properties of Devanagari shaping. A future requirement should name the authoring condition, processing component, language and evidence, rather than treat a Hindi result as script-wide.</p>
+</section>
+<section id="letters-for-sounds-outside-the-basic-set-hindi-example" class="level3">
+<h3>Letters for sounds outside the basic set: Hindi example</h3>
+<p>Devanagari’s basic consonants do not cover every sound used in Hindi. Hindi adds letters with the nukta (U+093C), a dot written below a consonant. The Hindi orthography notes say the nukta “is used to represent foreign sounds”: <span lang="hi">ज़</span> (<em>z</em>) is formed from <span lang="hi">ज</span> and <span lang="hi">फ़</span> (<em>f</em>) from <span lang="hi">फ</span>, and <span lang="hi">क़</span>, <span lang="hi">ख़</span> and <span lang="hi">ग़</span> are formed the same way. Hindi also writes <span lang="hi">ड़</span> and <span lang="hi">ढ़</span> with a nukta, for the flapped sounds in <span lang="hi">सड़क</span> and <span lang="hi">पढ़ना</span>.</p>
+<p>The same letter can be stored in two ways. Unicode has precomposed characters for these letters, in the range U+0958 to U+095F, but they are excluded from composition: normalization to NFC or NFD turns each into the base consonant followed by U+093C. The Hindi orthography notes report that the Unicode Standard recommends the base-plus-nukta sequence for Hindi, and they expect both forms to keep appearing in real text. In either form the nukta stays in one extended grapheme cluster with its consonant: <span lang="hi">ज़रूर</span> segments as <span lang="hi">ज़ · रू · र</span>.</p>
+<p>Two accessibility questions follow, and neither has been tested in this work. Do search, find-in-page and other matching treat the two encodings as the same letter? And do current voices give a nukta letter its own sound, reading <span lang="hi">ज़</span> with a <em>z</em> rather than the sound of <span lang="hi">ज</span>? As in the other sections, this records the characteristic; proposals for handling it belong to later requirements.</p>
+</section>
+</section>
+
+<section id="sources" class="appendix">
+<h2>References</h2>
+<ul>
+<li>Murata Makoto. <em>Accessibility Requirements for Japanese Web Content</em>. Working draft, snapshot of 11 September 2026; first presented to the Global-Inclusion Community Group, 26 August 2026.</li>
+<li>Richard Ishida. <em>Devanagari Script Resources</em>. W3C Group Note Draft, 20 March 2026; work in progress. <a href="https://www.w3.org/TR/deva-lreq/">https://www.w3.org/TR/deva-lreq/</a></li>
+<li>Richard Ishida. <em>Devanagari Gap Analysis</em>. W3C Group Draft Note, 31 May 2025; work in progress. <a href="https://www.w3.org/TR/deva-gap/">https://www.w3.org/TR/deva-gap/</a></li>
+<li>Swaran Lata, Somnath Chandra, and Prashant Verma. <em>Indic Layout Requirements</em>. W3C Working Draft, 29 May 2020. <a href="https://www.w3.org/TR/ilreq/">https://www.w3.org/TR/ilreq/</a></li>
+<li>W3C Internationalization Working Group. <em>India Language Enablement</em> (IIP). <a href="https://w3c.github.io/iip/home">https://w3c.github.io/iip/home</a></li>
+<li>Richard Ishida. <em>Hindi Orthography Notes</em>. <a href="https://r12a.github.io/scripts/deva/hi">https://r12a.github.io/scripts/deva/hi</a></li>
+<li>Unicode Consortium. <em>Unicode Standard Annex #29: Unicode Text Segmentation</em>, Unicode 15.1.0, Revision 43. <a href="https://www.unicode.org/reports/tr29/tr29-43.html">https://www.unicode.org/reports/tr29/tr29-43.html</a> Rule GB9c is unchanged in Revision 47 (Unicode 17.0.0), the version used for the comparison in §2.6. <a href="https://www.unicode.org/reports/tr29/tr29-47.html">https://www.unicode.org/reports/tr29/tr29-47.html</a> Unicode 18.0 revises GB9c in Revision 49. <a href="https://www.unicode.org/reports/tr29/tr29-49.html">https://www.unicode.org/reports/tr29/tr29-49.html</a> The §2.6 examples have not been segmented under that revision.</li>
+<li>Unicode Consortium. <em>Derived Core Properties</em>, Unicode 15.1.0, <code>Indic_Conjunct_Break</code>. <a href="https://www.unicode.org/Public/15.1.0/ucd/DerivedCoreProperties.txt">https://www.unicode.org/Public/15.1.0/ucd/DerivedCoreProperties.txt</a></li>
+<li>Unicode Consortium. <em>Composition Exclusions</em>, Unicode 17.0.0 (U+0958 to U+095F). <a href="https://www.unicode.org/Public/17.0.0/ucd/CompositionExclusions.txt">https://www.unicode.org/Public/17.0.0/ucd/CompositionExclusions.txt</a></li>
+<li>Adeetee Bhide. “Copying Helps Novice Learners Build Orthographic Knowledge: Methods for Teaching Devanagari Akshara.” <em>Reading and Writing</em> 31(1), 1–33, 2018. <a href="https://doi.org/10.1007/s11145-017-9767-8">https://doi.org/10.1007/s11145-017-9767-8</a></li>
+<li>Sonali Nag. “Reading the Akshara Writing System.” In <em>The Science of Reading: A Handbook</em>, 372–389, 2022. <a href="https://doi.org/10.1002/9781119705116.ch17">https://doi.org/10.1002/9781119705116.ch17</a></li>
+<li>Bhuvana Narasimhan, Richard Sproat, and George Kiraz. “Schwa-Deletion in Hindi Text-to-Speech Synthesis.” <em>International Journal of Speech Technology</em> 7(4), 319–333, 2004. <a href="https://doi.org/10.1023/B:IJST.0000037075.71599.62">https://doi.org/10.1023/B:IJST.0000037075.71599.62</a></li>
+</ul>
+</section>
+</body>
+</html>
